@@ -7,4 +7,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Reference Include="MGDSNet">
+      <HintPath>$(ProgramFiles)\Informatix\MicroGDS 11.3\Assemblies\MGDSNet.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
