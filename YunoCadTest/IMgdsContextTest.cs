@@ -7,6 +7,17 @@ namespace YunaComputer.YunoCadTest;
 public class IMgdsContextTest
 {
     [TestMethod]
+    public void CreateManFileTest()
+    {
+        var ctx = IMgdsContext.Instance;
+        var id = ctx.StartMicroGDS();
+        using var c = new Conversation();
+        c.Start(id, 5 * 1000);
+        ctx.CreateManFile();
+        ctx.Exit();
+    }
+
+    [TestMethod]
     public void EchoTest()
     {
         var ctx = IMgdsContext.Instance;

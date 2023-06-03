@@ -8,6 +8,8 @@ public interface IMgdsContext : IGlobalContext
     private static readonly IMgdsContext instance = new MgdsContext();
     static new IMgdsContext Instance => instance;
 
+    void CreateManFile() => Cad.CreateMANFile();
+
     void Echo(string echoStr = "") => Cad.Echo(echoStr);
 
     void Exit(Save drawing = Save.DoNotSave, Save preferences = Save.DoNotSave)
