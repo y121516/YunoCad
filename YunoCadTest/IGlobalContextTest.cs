@@ -36,4 +36,17 @@ public class IGlobalContextTest
         c.Start(id, 5 * 1000);
         Cad.Exit(Save.DoNotSave, Save.DoNotSave);
     }
+
+    [TestMethod]
+    public void GetSessionIDsTest()
+    {
+        var gc = IGlobalContext.Instance;
+        var id = gc.StartMicroGDS();
+        var ids = gc.GetSessionIDs();
+        Assert.IsTrue(ids.Count() > 0);
+        Assert.IsTrue(ids.ToList().Contains(id));
+        using var c = new Conversation();
+        c.Start(id, 5 * 1000);
+        Cad.Exit(Save.DoNotSave, Save.DoNotSave);
+    }
 }

@@ -14,4 +14,17 @@ public interface IGlobalContext
         => Cad.StartMicroGDS(fileType, timeoutMs);
 
     int GetSessionCount() => Cad.GetSessionCount();
+
+    IEnumerable<int> GetSessionIDs() => GetSessionIDs(GetSessionCount());
+    IEnumerable<int> GetSessionIDs(int maxSessionIDs)
+        => GetSessionIDsValidArraySize(new int[maxSessionIDs], maxSessionIDs);
+    IEnumerable<int> GetSessionIDs(int[] sessionIDs)
+        => GetSessionIDsValidArraySize(sessionIDs, sessionIDs.Length);
+    IEnumerable<int> GetSessionIDs(int[] sessionIDs, int maxSessionIDs)
+    {
+        if (sessionIDs.Length < maxSessionIDs) maxSessionIDs = sessionIDs.Length;
+        return GetSessionIDsValidArraySize(sessionIDs, maxSessionIDs);
+    }
+    private static IEnumerable<int> GetSessionIDsValidArraySize(int[] sessionIDs, int maxSessionIDs)
+        => sessionIDs.Take(Cad.GetSessionIDs(sessionIDs, maxSessionIDs));
 }
