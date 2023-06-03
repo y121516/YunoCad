@@ -5,6 +5,11 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <Authors>Yuhki Ogasawara</Authors>
+    <Company>Yuna Computer</Company>
+    <AssemblyName>$(Company.Replace(" ", "")).$(MSBuildProjectName.Replace(" ", "_"))</AssemblyName>
+    <RootNamespace>$(AssemblyName)</RootNamespace>
+    <Title>$(AssemblyName) context-based MGDSNet.dll wrapper library</Title>
   </PropertyGroup>
 
   <ItemGroup>
