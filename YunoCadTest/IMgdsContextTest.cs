@@ -18,6 +18,16 @@ public class IMgdsContextTest
     }
 
     [TestMethod]
+    public void ExitTest()
+    {
+        var ctx = IMgdsContext.Instance;
+        var id = ctx.StartMicroGDS();
+        using var c = new Conversation();
+        c.Start(id, 5 * 1000);
+        ctx.Exit();
+    }
+
+    [TestMethod]
     public void ScreenUpdateModeTest()
     {
         var mc = IMgdsContext.Instance;
