@@ -5,6 +5,8 @@ VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YunoCad", "YunoCad\YunoCad.csproj", "{F29F9BB3-CFE3-43EA-BCBD-6C970571DB2F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YunoCadTest", "YunoCadTest\YunoCadTest.csproj", "{CE3BF10E-ECBB-45D0-86F9-568D54C16B01}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{F29F9BB3-CFE3-43EA-BCBD-6C970571DB2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F29F9BB3-CFE3-43EA-BCBD-6C970571DB2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F29F9BB3-CFE3-43EA-BCBD-6C970571DB2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE3BF10E-ECBB-45D0-86F9-568D54C16B01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE3BF10E-ECBB-45D0-86F9-568D54C16B01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE3BF10E-ECBB-45D0-86F9-568D54C16B01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE3BF10E-ECBB-45D0-86F9-568D54C16B01}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
