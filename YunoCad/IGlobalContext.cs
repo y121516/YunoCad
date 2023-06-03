@@ -12,4 +12,6 @@ public interface IGlobalContext
     private const int defaultTimeoutMs = 30 * 1000;
     int StartMicroGDS(StartFileType fileType = defaultFileType, int timeoutMs = defaultTimeoutMs)
         => Cad.StartMicroGDS(fileType, timeoutMs);
+
+    int GetSessionCount() => Cad.GetSessionCount();
 }

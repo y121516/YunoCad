@@ -23,4 +23,17 @@ public class IGlobalContextTest
             Assert.Fail(ex.Message);
         }
     }
+
+    [TestMethod]
+    public void GetSessionCountTest()
+    {
+        var gc = IGlobalContext.Instance;
+        var count1 = gc.GetSessionCount();
+        var id = gc.StartMicroGDS();
+        var count2 = gc.GetSessionCount();
+        Assert.AreEqual(1, count2 - count1);
+        using var c = new Conversation();
+        c.Start(id, 5 * 1000);
+        Cad.Exit(Save.DoNotSave, Save.DoNotSave);
+    }
 }
