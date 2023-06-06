@@ -22,6 +22,30 @@ public class IDocumentContextTest
     }
 
     [TestMethod]
+    public void HandleDrawingWindowTest()
+    {
+        var ctx = IGlobalContext.Instance;
+        var id = ctx.StartMicroGDS();
+        using var c = new Conversation();
+        c.Start(mgds =>
+        {
+            mgds.CreateManFile();
+            void TestHandleDrawingWindowThrowsException()
+            {
+                mgds.HandleDocument(document =>
+                {
+                    document.HandleDrawingWindow(window =>
+                    {
+                        throw new Exception("OK");
+                    });
+                });
+            }
+            Assert.ThrowsException<Exception>(TestHandleDrawingWindowThrowsException);
+            mgds.Exit();
+        }, id);
+    }
+
+    [TestMethod]
     public void SetCursorFromFileTest()
     {
         var ctx = IDocumentContext.Instance;

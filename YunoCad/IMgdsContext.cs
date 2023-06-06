@@ -17,6 +17,20 @@ public interface IMgdsContext : IGlobalContext
     void Exit(Save drawing = Save.DoNotSave, Save preferences = Save.DoNotSave)
         => Cad.Exit(drawing, preferences);
 
+    void HandleDocument(Action<IDocumentContext> action)
+    {
+        try
+        {
+            // Called only to test if an active document exists
+            _ = Cad.DocGetViewType();
+        }
+        catch (Cad.CadException ex) when (ex.ErrorOccurred(AppErrorType.MGDS, AppError.RequiresDocument))
+        {
+            throw new DocumentHandleException("An active document is required for this operation", ex);
+        }
+        action(IDocumentContext.Instance);
+    }
+
     void Open(string fileName, string formatOptions)
     {
         // Bug: This is a critical bug in MicroGDS 11.3. 

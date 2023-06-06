@@ -52,6 +52,28 @@ public class IMgdsContextTest
     }
 
     [TestMethod]
+    public void HandleDocumentTest()
+    {
+        var ctx = IGlobalContext.Instance;
+        var id = ctx.StartMicroGDS();
+        using var c = new Conversation();
+        c.Start(mgds =>
+        {
+            mgds.CreateManFile();
+            Cad.CloseView();
+            void TestHandleDocumentThrowsException()
+            {
+                mgds.HandleDocument(document =>
+                {
+                    throw new Exception("OK");
+                });
+            }
+            Assert.ThrowsException<Exception>(TestHandleDocumentThrowsException);
+            mgds.Exit();
+        }, id);
+    }
+
+    [TestMethod]
     public void OpenTest()
     {
         var ctx = IMgdsContext.Instance;
