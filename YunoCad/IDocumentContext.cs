@@ -9,4 +9,6 @@ public interface IDocumentContext : IMgdsContext
     static new IDocumentContext Instance => instance;
 
     void SetCursorFromFile(string fileName) => Cad.SetCursorFromFile(fileName);
+
+    DocViewType ViewType => Cad.DocGetViewType();
 }
