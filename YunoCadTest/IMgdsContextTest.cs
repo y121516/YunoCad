@@ -18,6 +18,19 @@ public class IMgdsContextTest
     }
 
     [TestMethod]
+    public void DocResynchTest()
+    {
+        var ctx = IDocumentContext.Instance;
+        var id = ctx.StartMicroGDS();
+        using var c = new Conversation();
+        c.Start(mgds =>
+        {
+            mgds.DocResynch();
+            mgds.Exit();
+        }, id);
+    }
+
+    [TestMethod]
     public void EchoTest()
     {
         var ctx = IMgdsContext.Instance;

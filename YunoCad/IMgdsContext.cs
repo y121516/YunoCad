@@ -10,6 +10,8 @@ public interface IMgdsContext : IGlobalContext
 
     void CreateManFile() => Cad.CreateMANFile();
 
+    void DocResynch() => Cad.DocResynch();
+
     void Echo(string echoStr = "") => Cad.Echo(echoStr);
 
     void Exit(Save drawing = Save.DoNotSave, Save preferences = Save.DoNotSave)
