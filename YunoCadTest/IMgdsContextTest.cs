@@ -39,6 +39,21 @@ public class IMgdsContextTest
     }
 
     [TestMethod]
+    public void OpenTest()
+    {
+        var ctx = IMgdsContext.Instance;
+        var id = ctx.StartMicroGDS();
+        using var c = new Conversation();
+        c.Start(mgds =>
+        {
+            var fileName = @"C:\Program Files\Informatix\MicroGDS 11.3\Sample Drawings\Sdmf1.man";
+            var options = new Informatix.MGDS.Import.MAN.Options();
+            mgds.Open(fileName, options);
+            mgds.Exit();
+        }, id);
+    }
+
+    [TestMethod]
     public void ScreenUpdateModeTest()
     {
         var mc = IMgdsContext.Instance;

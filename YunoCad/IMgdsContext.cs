@@ -15,6 +15,29 @@ public interface IMgdsContext : IGlobalContext
     void Exit(Save drawing = Save.DoNotSave, Save preferences = Save.DoNotSave)
         => Cad.Exit(drawing, preferences);
 
+    void Open(string fileName, string formatOptions)
+    {
+        // Bug: This is a critical bug in MicroGDS 11.3. 
+        // If an empty string ("") is passed to the fileName parameter in Cad.Open, 
+        // MicroGDS crashes, leaving the application hanging in communication. 
+        // Workaround:
+        // We prevent an empty string from being passed to the fileName parameter in Cad.Open.
+        if (fileName == "")
+        {
+            // Intentionally provoke the Cad.CadException with AppError.InvalidParameter[1000]
+            // that should originally be thrown
+            Cad.Open(null, null);
+        }
+        // If the formatOptions parameter (an XML string) in Cad.Open is incorrect,
+        // it can throw a Cad.CadException with AppError.Because[1143].
+        Cad.Open(fileName, formatOptions);
+    }
+
+    void Open(string fileName, Informatix.MGDS.ImportExport.Options options)
+    {
+        Open(fileName, options.Xml());
+    }
+
     void ScreenUpdateMode(ScreenUpdate updateMode)
         => Cad.ScreenUpdateMode(updateMode);
 }
