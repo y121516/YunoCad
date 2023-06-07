@@ -25,6 +25,27 @@ public class IDocumentContextTest
     }
 
     [TestMethod]
+    public void DeleteSelectionTest()
+    {
+        var ctx = IGlobalContext.Instance;
+        var id = ctx.StartMicroGDS();
+        using var c = new Conversation();
+        c.Start(mgds =>
+        {
+            Cad.CreateMANFile();
+            Cad.CreateText("text", new Cad.Vector());
+            Cad.SelectAll();
+            mgds.HandleDocument(document =>
+            {
+                document.DeleteSelection();
+                Cad.CloseView();
+                document.DeleteSelection();
+            });
+            mgds.Exit();
+        }, id);
+    }
+
+    [TestMethod]
     public void DocGetViewTypeTest()
     {
         var ctx = IDocumentContext.Instance;

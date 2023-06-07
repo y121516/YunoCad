@@ -11,6 +11,15 @@ public interface IDocumentContext : IMgdsContext
 
     DialogResult CloseFile(Save drawing = Save.DoNotSave) => Cad.CloseFile(drawing);
 
+    void DeleteSelection()
+    {
+        // If nothing is selected, Cad.DeleteSelection() throws
+        // a Cad.CadException with AppError.RequiresSelection[1053].
+        // Therefore, if nothing is selected, we bypass the operation.
+        if (Cad.GetNumSelObj() == 0) return;
+        Cad.DeleteSelection();
+    }
+
     int GetNumSelObj() => Cad.GetNumSelObj();
 
     void HandleDrawingWindow(Action<IDrawingWindowContext> action)
