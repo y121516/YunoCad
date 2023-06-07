@@ -11,6 +11,8 @@ public interface IDocumentContext : IMgdsContext
 
     DialogResult CloseFile(Save drawing = Save.DoNotSave) => Cad.CloseFile(drawing);
 
+    int GetNumSelObj() => Cad.GetNumSelObj();
+
     void HandleDrawingWindow(Action<IDrawingWindowContext> action)
     {
         try
