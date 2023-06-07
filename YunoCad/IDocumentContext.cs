@@ -9,6 +9,8 @@ public interface IDocumentContext : IMgdsContext
     private static readonly IDocumentContext instance = new DocumentContext();
     static new IDocumentContext Instance => instance;
 
+    DialogResult CloseFile(Save drawing = Save.DoNotSave) => Cad.CloseFile(drawing);
+
     void HandleDrawingWindow(Action<IDrawingWindowContext> action)
     {
         try

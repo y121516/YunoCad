@@ -7,6 +7,24 @@ namespace YunaComputer.YunoCadTest;
 public class IDocumentContextTest
 {
     [TestMethod]
+    public void CloseFileTest()
+    {
+        var ctx = IGlobalContext.Instance;
+        var id = ctx.StartMicroGDS();
+        using var c = new Conversation();
+        c.Start(mgds =>
+        {
+            mgds.CreateManFile();
+            Cad.CloseView();
+            mgds.HandleDocument(document =>
+            {
+                document.CloseFile();
+            });
+            mgds.Exit();
+        }, id);
+    }
+
+    [TestMethod]
     public void DocGetViewTypeTest()
     {
         var ctx = IDocumentContext.Instance;
