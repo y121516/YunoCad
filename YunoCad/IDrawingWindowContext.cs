@@ -14,6 +14,16 @@ public interface IDrawingWindowContext : IDocumentContext
 
     void DrawExtent() => Cad.DrawExtent();
 
+    bool IsExpandView
+    {
+        get => Cad.ExpandViewIsActive();
+        set
+        {
+            if (value == Cad.ExpandViewIsActive()) return;
+            Cad.ExpandView();
+        }
+    }
+
     FormWindowState WindowState
     {
         set
