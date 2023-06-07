@@ -12,6 +12,8 @@ public interface IDrawingWindowContext : IDocumentContext
     void CreateLayer(string layerName, string aliasName = "") =>
         Cad.CreateLayer(layerName, aliasName);
 
+    void DrawExtent() => Cad.DrawExtent();
+
     FormWindowState WindowState
     {
         set
