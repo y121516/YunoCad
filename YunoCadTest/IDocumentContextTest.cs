@@ -99,4 +99,31 @@ public class IDocumentContextTest
         ctx.SetCursorFromFile("");
         Cad.Exit(Save.DoNotSave, Save.DoNotSave);
     }
+
+    [TestMethod]
+    public void SetEditTest()
+    {
+        var ctx = IGlobalContext.Instance;
+        var id = ctx.StartMicroGDS();
+        using var c = new Conversation();
+        c.Start(mgds =>
+        {
+            mgds.CreateManFile();
+            Cad.CloseView();
+            mgds.HandleDocument(document =>
+            {
+                var colour = document.SetEditColour;
+                document.SetEditColour = colour;
+                var lineStyle = document.SetEditLineStyle;
+                document.SetEditLineStyle = lineStyle;
+                var material = document.SetEditMaterial;
+                document.SetEditMaterial = material;
+                var obj = document.SetEditObj;
+                document.SetEditObj = obj;
+                var text = document.SetEditText;
+                document.SetEditText = text;
+            });
+            mgds.Exit();
+        }, id);
+    }
 }

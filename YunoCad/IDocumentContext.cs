@@ -40,5 +40,55 @@ public interface IDocumentContext : IMgdsContext
 
     void SetCursorFromFile(string fileName) => Cad.SetCursorFromFile(fileName);
 
+    string SetEditColour
+    {
+        get
+        {
+            Cad.GetSetEditColour(out var value);
+            return value;
+        }
+        set => Cad.SetEditColour(value);
+    }
+
+    string SetEditLineStyle
+    {
+        get
+        {
+            Cad.GetSetEditLineStyle(out var value);
+            return value;
+        }
+        set => Cad.SetEditLineStyle(value);
+    }
+
+    string SetEditMaterial
+    {
+        get
+        {
+            Cad.GetSetEditMaterial(out var value);
+            return value;
+        }
+        set => Cad.SetEditMaterial(value);
+    }
+
+    string SetEditObj
+    {
+        get
+        {
+            Cad.GetSetEditObj(out var value);
+            return value;
+        }
+        set => Cad.SetEditObj(value);
+    }
+
+    string SetEditText
+    {
+        get
+        {
+            Cad.GetSetEditText(out var value);
+            return value;
+        }
+        set => Cad.SetEditText(value);
+    }
+
     DocViewType ViewType => Cad.DocGetViewType();
 }
