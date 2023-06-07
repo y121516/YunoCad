@@ -46,6 +46,30 @@ public class IDocumentContextTest
     }
 
     [TestMethod]
+    public void LayoutMdiTest()
+    {
+        var ctx = IGlobalContext.Instance;
+        var id = ctx.StartMicroGDS();
+        using var c = new Conversation();
+        c.Start(mgds =>
+        {
+            mgds.CreateManFile();
+            mgds.CreateManFile();
+            mgds.CreateManFile();
+            mgds.CreateManFile();
+            Cad.CloseView();
+            mgds.HandleDocument(document =>
+            {
+                document.LayoutMdi(System.Windows.Forms.MdiLayout.Cascade);
+                document.LayoutMdi(System.Windows.Forms.MdiLayout.TileHorizontal);
+                document.LayoutMdi(System.Windows.Forms.MdiLayout.TileVertical);
+                document.LayoutMdi(System.Windows.Forms.MdiLayout.ArrangeIcons);
+            });
+            mgds.Exit();
+        }, id);
+    }
+
+    [TestMethod]
     public void SetCursorFromFileTest()
     {
         var ctx = IDocumentContext.Instance;

@@ -1,4 +1,5 @@
 ﻿using Informatix.MGDS;
+using System.ComponentModel;
 
 namespace YunaComputer.YunoCad;
 
@@ -20,6 +21,19 @@ public interface IDocumentContext : IMgdsContext
             throw new DrawingWindowHandleException("A drawing window is required for this operation", ex);
         }
         action(IDrawingWindowContext.Instance);
+    }
+
+    void LayoutMdi(MdiLayout layout)
+    {
+        var arrangement = layout switch
+        {
+            MdiLayout.Cascade => Arrange.Cascade,
+            MdiLayout.TileHorizontal => Arrange.TileHoriz,
+            MdiLayout.TileVertical => Arrange.TileVert,
+            MdiLayout.ArrangeIcons => Arrange.Icons,
+            _ => throw new InvalidEnumArgumentException(nameof(layout), (int)layout, typeof(MdiLayout))
+        };
+        Cad.WindowArrange(arrangement);
     }
 
     void SetCursorFromFile(string fileName) => Cad.SetCursorFromFile(fileName);
