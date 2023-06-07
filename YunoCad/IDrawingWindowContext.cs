@@ -24,6 +24,8 @@ public interface IDrawingWindowContext : IDocumentContext
         }
     }
 
+    void SaveAs(string fileName) => Cad.SaveAs(fileName);
+
     void SaveView() => Cad.SaveView();
 
     FormWindowState WindowState

@@ -64,6 +64,29 @@ public class IDrawingWindowContextTest
     }
 
     [TestMethod]
+    public void SaveAsTest()
+    {
+        var ctx = IGlobalContext.Instance;
+        var id = ctx.StartMicroGDS();
+        using var c = new Conversation();
+        var name = Path.ChangeExtension(nameof(SaveAsTest), ".man");
+        var tempFileName = Path.Combine(Path.GetTempPath(), name);
+        c.Start(mgds =>
+        {
+            mgds.CreateManFile();
+            mgds.HandleDocument(document =>
+            {
+                document.HandleDrawingWindow(window =>
+                {
+                    window.SaveAs(tempFileName);
+                });
+            });
+            mgds.Exit();
+        }, id);
+        File.Delete(tempFileName);
+    }
+
+    [TestMethod]
     public void SaveViewTest()
     {
         var ctx = IGlobalContext.Instance;
