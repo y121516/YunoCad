@@ -88,6 +88,27 @@ public class IDocumentContextTest
     }
 
     [TestMethod]
+    public void SelectionModeTest()
+    {
+        var ctx = IGlobalContext.Instance;
+        var id = ctx.StartMicroGDS();
+        using var c = new Conversation();
+        c.Start(mgds =>
+        {
+            mgds.CreateManFile();
+            Cad.CloseView();
+            mgds.HandleDocument(document =>
+            {
+                var mode = document.SelectionMode;
+                document.SelectionMode = mode;
+                document.SelectionMode = SelectionMode.Obj;
+                document.SelectionMode = SelectionMode.Prim;
+            });
+            mgds.Exit();
+        }, id);
+    }
+
+    [TestMethod]
     public void SetCursorFromFileTest()
     {
         var ctx = IDocumentContext.Instance;

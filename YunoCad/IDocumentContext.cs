@@ -38,6 +38,25 @@ public interface IDocumentContext : IMgdsContext
         Cad.WindowArrange(arrangement);
     }
 
+    /// <summary>
+    /// Gets or sets the selection mode.
+    /// When the selection mode changes, the selection state will be cleared. 
+    /// However, if the selection mode remains the same, the selection state will not be affected.
+    /// </summary>
+    Informatix.MGDS.SelectionMode SelectionMode
+    {
+        get => Cad.GetSelectMode();
+        set
+        {
+            if (value == Cad.GetSelectMode()) return;
+            switch (value)
+            {
+                case Informatix.MGDS.SelectionMode.Obj: Cad.SelectObject(); break;
+                case Informatix.MGDS.SelectionMode.Prim: Cad.SelectPrim(); break;
+            }
+        }
+    }
+
     void SetCursorFromFile(string fileName) => Cad.SetCursorFromFile(fileName);
 
     string SetEditColour
