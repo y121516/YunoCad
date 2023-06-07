@@ -28,6 +28,8 @@ public interface IDrawingWindowContext : IDocumentContext
 
     void SaveView() => Cad.SaveView();
 
+    void SelectAll() => Cad.SelectAll();
+
     FormWindowState WindowState
     {
         set

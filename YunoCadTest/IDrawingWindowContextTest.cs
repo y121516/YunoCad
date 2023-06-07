@@ -107,6 +107,26 @@ public class IDrawingWindowContextTest
     }
 
     [TestMethod]
+    public void SelectAllTest()
+    {
+        var ctx = IGlobalContext.Instance;
+        var id = ctx.StartMicroGDS();
+        using var c = new Conversation();
+        c.Start(mgds =>
+        {
+            mgds.CreateManFile();
+            mgds.HandleDocument(document =>
+            {
+                document.HandleDrawingWindow(window =>
+                {
+                    window.SelectAll();
+                });
+            });
+            mgds.Exit();
+        }, id);
+    }
+
+    [TestMethod]
     public void WindowStateTest()
     {
         var ctx = IGlobalContext.Instance;
