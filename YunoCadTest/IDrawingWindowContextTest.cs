@@ -64,6 +64,26 @@ public class IDrawingWindowContextTest
     }
 
     [TestMethod]
+    public void SaveViewTest()
+    {
+        var ctx = IGlobalContext.Instance;
+        var id = ctx.StartMicroGDS();
+        using var c = new Conversation();
+        c.Start(mgds =>
+        {
+            mgds.CreateManFile();
+            mgds.HandleDocument(document =>
+            {
+                document.HandleDrawingWindow(window =>
+                {
+                    Cad.SaveView();
+                });
+            });
+            mgds.Exit();
+        }, id);
+    }
+
+    [TestMethod]
     public void WindowStateTest()
     {
         var ctx = IGlobalContext.Instance;
