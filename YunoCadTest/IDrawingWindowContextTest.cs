@@ -7,6 +7,20 @@ namespace YunaComputer.YunoCadTest;
 public class IDrawingWindowContextTest
 {
     [TestMethod]
+    public void CopySelectionTest()
+    {
+        var ctx = IGlobalContext.Instance;
+        var id = ctx.StartMicroGDS();
+        using var c = new Conversation();
+        c.Start(mgds =>
+        {
+            mgds.CreateManFile();
+            Cad.CopySelection();
+            mgds.Exit();
+        }, id);
+    }
+
+    [TestMethod]
     public void CreateLayerTest()
     {
         var ctx = IDocumentContext.Instance;

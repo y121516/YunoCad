@@ -9,6 +9,8 @@ public interface IDrawingWindowContext : IDocumentContext
     private static readonly IDrawingWindowContext instance = new DrawingWindowContext();
     static new IDrawingWindowContext Instance => instance;
 
+    void CopySelection() => Cad.CopySelection();
+
     void CreateLayer(string layerName, string aliasName = "") =>
         Cad.CreateLayer(layerName, aliasName);
 
