@@ -99,7 +99,7 @@ abstract public class MgdsCadTestBase
         catch (Cad.CadException ex)
         {
             if (ex.ErrorOccurred(AppErrorType.MGDS, appError)) return;
-            Assert.Fail("A CadException was thrown, but the value of AppError was different.");
+            Assert.Fail($"A CadException was thrown, but the value of AppError was different. Expected: {appError} ({(int)appError}).");
         }
         Assert.Fail("No CadException was thrown.");
     }
