@@ -69,6 +69,31 @@ public class MgdsCadTest : MgdsCadTestBase
         ContextTest(Mgds, Echo);
     }
 
+    void Exit()
+    {
+        Cad.Exit(Save.DoNotSave, Save.DoNotSave);
+    }
+
+    [TestMethod]
+    public void ExitTest()
+    {
+        // Since Cad.Exit terminates MicroGDS in this test,
+        // an exception is thrown when ContextTest tries to terminate MicroGDS during cleanup.
+        // This behavior is expected.
+        try
+        {
+            ContextTest(Mgds, Exit);
+        }
+        catch (Cad.CadException ex)
+        {
+            if (ex.ErrorOccurred(AppErrorType.MGDS, NoConversation))
+            {
+                return;
+            }
+            throw;
+        }
+    }
+
     void GetNumSelObj()
     {
         _ = Cad.GetNumSelObj();
