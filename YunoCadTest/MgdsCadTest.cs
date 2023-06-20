@@ -18,6 +18,17 @@ public class MgdsCadTest : MgdsCadTestBase
         ContextTest(Document, CloseFile);
     }
 
+    void CreateMANFile()
+    {
+        Cad.CreateMANFile();
+    }
+
+    [TestMethod]
+    public void CreateMANFileTest()
+    {
+        ContextTest(Mgds, CreateMANFile);
+    }
+
     void DocGetViewType()
     {
         Cad.DocGetViewType();
@@ -117,7 +128,7 @@ public class MgdsCadTest : MgdsCadTestBase
     [TestMethod]
     public void GetSessionIDsTest()
     {
-        ContextTest(Global, GetSessionIDs);
+        ContextTest(Global, GetSessionIDs); 
     }
 
     void GetSetEditColour()
