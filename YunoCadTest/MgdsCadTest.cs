@@ -40,6 +40,17 @@ public class MgdsCadTest : MgdsCadTestBase
         ContextTest(Document, DocGetViewType);
     }
 
+    void DocResynch()
+    {
+        Cad.DocResynch();
+    }
+
+    [TestMethod]
+    public void DocResynchTest()
+    {
+        ContextTest(Mgds, DocResynch);
+    }
+
     void Echo()
     {
         Cad.Echo("");
@@ -128,7 +139,7 @@ public class MgdsCadTest : MgdsCadTestBase
     [TestMethod]
     public void GetSessionIDsTest()
     {
-        ContextTest(Global, GetSessionIDs); 
+        ContextTest(Global, GetSessionIDs);
     }
 
     void GetSetEditColour()
