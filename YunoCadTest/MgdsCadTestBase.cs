@@ -11,6 +11,7 @@ abstract public class MgdsCadTestBase
         Mgds,
         Document,
         DrawingWindow,
+        ElementsSelected,
     }
 
     /// <summary>
@@ -62,6 +63,31 @@ abstract public class MgdsCadTestBase
     }
 
     /// <summary>
+    /// Tests in a state where the current document is open and some elements are selected,
+    /// under elements selected context.
+    /// </summary>
+    /// <param name="action">Action to test under elements selected context</param>
+    void ElementsSelectedContextTest(Action action)
+    {
+        // Although Elements Selected Context is a child context of Document Context,
+        // the Drawing Window Context is used for preparation to properly call the API (Cad.*)
+        // to create elements for selection.
+        DrawingWindowContextTest(() =>
+        {
+            Cad.CreateText("text", new());
+            var l = Cad.GetSetLayLink();
+            var o = Cad.GetSetObjLink();
+            // By closing the view, it ensures that it becomes a child context of the Document Context,
+            // not a child context of the Drawing Window Context
+            Cad.CloseView();
+            Cad.SelectObject();
+            Cad.CurObject(l, o);
+            Cad.SelectAdd();
+            action();
+        });
+    }
+
+    /// <summary>
     /// Tests whether MicroGDS .NET API (Cad.*) works correctly in a specific context.
     /// </summary>
     /// <param name="context">The context under which Cad.* works correctly</param>
@@ -75,6 +101,7 @@ abstract public class MgdsCadTestBase
             Context.Mgds => (GlobalContextTest, MgdsContextTest),
             Context.Document => (MgdsContextTest, DocumentContextTest),
             Context.DrawingWindow => (DocumentContextTest, DrawingWindowContextTest),
+            Context.ElementsSelected => (DocumentContextTest, ElementsSelectedContextTest),
             _ => throw new InvalidEnumArgumentException(nameof(context), (int)context, typeof(Context))
         };
         test(action);
