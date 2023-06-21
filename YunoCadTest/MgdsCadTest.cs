@@ -97,6 +97,17 @@ public class MgdsCadTest : MgdsCadTestBase
         ContextTest(Mgds, DocResynch);
     }
 
+    void DrawExtent()
+    {
+        Cad.DrawExtent();
+    }
+
+    [TestMethod]
+    public void DrawExtentTest()
+    {
+        ContextTest(DrawingWindow, DrawExtent);
+    }
+
     void Echo()
     {
         Cad.Echo("");
