@@ -29,6 +29,17 @@ public class MgdsCadTest : MgdsCadTestBase
         ContextTest(Mgds, CreateMANFile);
     }
 
+    void DeleteSelection()
+    {
+        Cad.DeleteSelection();
+    }
+
+    [TestMethod]
+    public void DeleteSelectionTest()
+    {
+        ContextTest(ElementsSelected, DeleteSelection);
+    }
+
     void DocGetViewType()
     {
         Cad.DocGetViewType();
