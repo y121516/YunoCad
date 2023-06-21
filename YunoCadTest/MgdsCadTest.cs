@@ -265,6 +265,18 @@ public class MgdsCadTest : MgdsCadTestBase
         ContextTest(Mgds, Open);
     }
 
+    void ScreenUpdateMode()
+    {
+        Cad.ScreenUpdateMode(ScreenUpdate.Interactive);
+        Cad.ScreenUpdateMode(ScreenUpdate.Bulk);
+    }
+
+    [TestMethod]
+    public void ScreenUpdateModeTest()
+    {
+        ContextTest(Mgds, ScreenUpdateMode);
+    }
+
     void SelectObject()
     {
         Cad.SelectObject();
