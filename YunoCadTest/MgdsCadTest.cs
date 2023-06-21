@@ -18,6 +18,17 @@ public class MgdsCadTest : MgdsCadTestBase
         ContextTest(Document, CloseFile);
     }
 
+    void CopySelection()
+    {
+        Cad.CopySelection();
+    }
+
+    [TestMethod]
+    public void CopySelectionTest()
+    {
+        ContextTest(DrawingWindow, CopySelection);
+    }
+
     void CreateMANFile()
     {
         Cad.CreateMANFile();
