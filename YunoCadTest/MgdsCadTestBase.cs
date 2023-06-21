@@ -105,6 +105,31 @@ abstract public class MgdsCadTestBase
     }
 
     /// <summary>
+    /// Tests whether a Cad.CadException is thrown.
+    /// </summary>
+    /// <param name="appErrors">A collection of expected AppErrors.</param>
+    /// <param name="action">The action to perform that should throw the exception.</param>
+    protected void ThrowsCadException(IEnumerable<AppError> appErrors, Action action)
+    {
+        try
+        {
+            action();
+        }
+        catch (Cad.CadException ex)
+        {
+            foreach (var appError in appErrors)
+            {
+                if (!ex.ErrorOccurred(AppErrorType.MGDS, appError))
+                {
+                    Assert.Fail($"A CadException was thrown, but the value of AppError was different. Expected: {appError} ({(int)appError}).");
+                }
+            }
+            return;
+        }
+        Assert.Fail("No CadException was thrown.");
+    }
+
+    /// <summary>
     /// Asserts that a function will throw a Cad.CadException indicating a
     /// CadLink application error.
     /// </summary>
