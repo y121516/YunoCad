@@ -29,6 +29,30 @@ public class MgdsCadTest : MgdsCadTestBase
         ContextTest(DrawingWindow, CopySelection);
     }
 
+    void CreateLayer()
+    {
+        Cad.CreateLayer("newLayer", "");
+        Cad.CreateLayer("new Layer", null);
+        ThrowsCadException(InvalidParameter, () =>
+        {
+            Cad.CreateLayer(null, "");
+        });
+        ThrowsCadException(PhaseCreateFailed, () =>
+        {
+            Cad.CreateLayer("", "");
+        });
+        ThrowsCadException(PhaseCreateFailed, () =>
+        {
+            Cad.CreateLayer("*", "");
+        });
+    }
+
+    [TestMethod]
+    public void CreateLayerTest()
+    {
+        ContextTest(DrawingWindow, CreateLayer);
+    }
+
     void CreateMANFile()
     {
         Cad.CreateMANFile();
