@@ -222,6 +222,49 @@ public class MgdsCadTest : MgdsCadTestBase
         ContextTest(Document, GetSetEditText);
     }
 
+    void Open()
+    {
+        const string fileName = @"C:\Program Files\Informatix\MicroGDS 11.3\Sample Drawings\Sdmf1.man";
+        var optionXml = new Informatix.MGDS.Import.MAN.Options().Xml();
+        Cad.Open(fileName, optionXml);
+
+        ThrowsCadException(InvalidParameter, () =>
+        {
+            Cad.Open(null, optionXml);
+        });
+#if false
+        // This test is not run due to a critical bug in MicroGDS 11.3.
+        // Bug details:
+        // When an empty string ("") is passed as the fileName argument to Cad.Open,
+        // after a dialog message stating "無題のファイル に正しくないパスが含まれています。",
+        // a Microsoft Visual C++ Runtime Library error is displayed,
+        // and MicroGDS crashes while still in communication.
+        Cad.Open("", optionXml);
+#endif
+        ThrowsCadException(new[] { FileError, FileReadError }, () =>
+        {
+            Cad.Open("file", optionXml);
+        });
+        ThrowsCadException(new[] { FileError, FileReadError }, () =>
+        {
+            Cad.Open("con", optionXml);
+        });
+        ThrowsCadException(InvalidParameter, () =>
+        {
+            Cad.Open(fileName, null);
+        });
+        ThrowsCadException(Because, () =>
+        {
+            Cad.Open(fileName, "");
+        });
+    }
+
+    [TestMethod]
+    public void OpenTest()
+    {
+        ContextTest(Mgds, Open);
+    }
+
     void SelectObject()
     {
         Cad.SelectObject();
