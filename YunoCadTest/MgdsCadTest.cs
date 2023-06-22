@@ -344,6 +344,26 @@ public class MgdsCadTest : MgdsCadTestBase
         ContextTest(Mgds, Open);
     }
 
+    void SaveAs()
+    {
+        var tempManFile = Path.Combine(Path.GetTempPath(), $"{nameof(SaveAs)}Test.man");
+        Cad.SaveAs(tempManFile);
+        ThrowsCadException(InvalidParameter, () =>
+        {
+            Cad.SaveAs(null);
+        });
+        ThrowsCadException(new[] { FileWriteError, Because }, () =>
+        {
+            Cad.SaveAs("");
+        });
+    }
+
+    [TestMethod]
+    public void SaveAsTest()
+    {
+        ContextTest(DrawingWindow, SaveAs);
+    }
+
     void ScreenUpdateMode()
     {
         Cad.ScreenUpdateMode(ScreenUpdate.Interactive);
