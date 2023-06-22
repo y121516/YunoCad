@@ -151,6 +151,17 @@ public class MgdsCadTest : MgdsCadTestBase
         }
     }
 
+    void ExpandView()
+    {
+        Cad.ExpandView();
+    }
+
+    [TestMethod]
+    public void ExpandViewTest()
+    {
+        ContextTest(DrawingWindow, ExpandView);
+    }
+
     void ExpandViewIsActive()
     {
         _ = Cad.ExpandViewIsActive();
