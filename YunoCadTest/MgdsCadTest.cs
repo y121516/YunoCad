@@ -151,6 +151,17 @@ public class MgdsCadTest : MgdsCadTestBase
         }
     }
 
+    void ExpandViewIsActive()
+    {
+        _ = Cad.ExpandViewIsActive();
+    }
+
+    [TestMethod]
+    public void ExpandViewIsActiveTest()
+    {
+        ContextTest(DrawingWindow, ExpandViewIsActive);
+    }
+
     void GetNumSelObj()
     {
         _ = Cad.GetNumSelObj();
