@@ -715,4 +715,31 @@ public class MgdsCadTest : MgdsCadTestBase
     {
         ContextTest(DrawingWindow, WindowArrange2);
     }
+
+    void WndScanStart()
+    {
+        {
+            // If the window definition is not found, returns false
+            string name = "ChangeMe";
+            var isFound = Cad.WndScanStart("", out name);
+            Assert.IsFalse(isFound);
+            Assert.AreEqual("", name);
+        }
+        {
+            // If the window definition is found, returns true
+            var found = Cad.WndScanStart("*", out string name);
+            Assert.IsTrue(found);
+            Assert.AreEqual("ウィンドウ定義1", name);
+        }
+        ThrowsCadException(InvalidParameter, () =>
+        {
+            Cad.WndScanStart(null, out string _);
+        });
+    }
+
+    [TestMethod]
+    public void WndScanStartTest()
+    {
+        ContextTest(Document, WndScanStart);
+    }
 }
