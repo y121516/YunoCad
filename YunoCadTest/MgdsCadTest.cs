@@ -364,6 +364,17 @@ public class MgdsCadTest : MgdsCadTestBase
         ContextTest(DrawingWindow, SaveAs);
     }
 
+    void SaveView()
+    {
+        Cad.SaveView();
+    }
+
+    [TestMethod]
+    public void SaveViewTest()
+    {
+        ContextTest(DrawingWindow, SaveView);
+    }
+
     void ScreenUpdateMode()
     {
         Cad.ScreenUpdateMode(ScreenUpdate.Interactive);
