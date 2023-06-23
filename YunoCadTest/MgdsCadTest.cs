@@ -716,6 +716,25 @@ public class MgdsCadTest : MgdsCadTestBase
         ContextTest(DrawingWindow, WindowArrange2);
     }
 
+    void WndNext()
+    {
+        try
+        {
+            Cad.WndNext(out string _);
+        }
+        catch (Cad.CadException ex)
+        {
+            if (ex.ErrorOccurred(AppErrorType.MGDS, NoActiveScan)) return;
+            throw;
+        }
+    }
+
+    [TestMethod]
+    public void WndNextTest()
+    {
+        ContextTest(Document, WndNext);
+    }
+
     void WndScanStart()
     {
         {
