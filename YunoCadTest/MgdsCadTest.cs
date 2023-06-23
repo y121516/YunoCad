@@ -387,6 +387,17 @@ public class MgdsCadTest : MgdsCadTestBase
         ContextTest(Mgds, ScreenUpdateMode);
     }
 
+    void SelectAll()
+    {
+        Cad.SelectAll();
+    }
+
+    [TestMethod]
+    public void SelectAllTest()
+    {
+        ContextTest(DrawingWindow, SelectAll);
+    }
+
     void SelectObject()
     {
         Cad.SelectObject();
