@@ -5,6 +5,15 @@ namespace YunaComputer.YunoCadTest;
 
 abstract public class MgdsCadTestBase
 {
+    /// <summary>
+    /// <code>
+    /// - Global
+    ///  - Mgds
+    ///    - Document
+    ///      - DrawingWindow
+    ///      - ElementsSelected
+    /// </code>
+    /// </summary>
     public enum Context
     {
         Global,
