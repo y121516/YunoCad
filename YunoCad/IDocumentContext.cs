@@ -20,6 +20,17 @@ public interface IDocumentContext : IMgdsContext
         Cad.DeleteSelection();
     }
 
+    IEnumerable<string> EnumerateWndNames(string nameWildcard = "*")
+    {
+        if (Cad.WndScanStart(nameWildcard, out string name))
+        {
+            do
+            {
+                yield return name;
+            } while (Cad.WndNext(out name));
+        }
+    }
+
     int GetNumSelObj() => Cad.GetNumSelObj();
 
     void HandleDrawingWindow(Action<IDrawingWindowContext> action)

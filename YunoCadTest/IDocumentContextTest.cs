@@ -61,6 +61,26 @@ public class IDocumentContextTest
     }
 
     [TestMethod]
+    public void EnumerateWndNamesTest()
+    {
+        var ctx = IGlobalContext.Instance;
+        var id = ctx.StartMicroGDS();
+        using var c = new Conversation();
+        c.Start(mgds =>
+        {
+            mgds.CreateManFile();
+            Cad.CloseView();
+            mgds.HandleDocument(document =>
+            {
+                foreach (var wndName in document.EnumerateWndNames())
+                {
+                }
+            });
+            mgds.Exit();
+        }, id);
+    }
+
+    [TestMethod]
     public void GetNumSelObjTest()
     {
         var ctx = IGlobalContext.Instance;
