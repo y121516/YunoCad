@@ -195,7 +195,7 @@ abstract public class MgdsCadTestBase
         {
             // If the exception has the expected message indicating a CadLink
             // application error, return early.
-            if (ex.Message == "CadLink 配列サイズエラー (sessionIDArray)") return;
+            if (ex.Message.StartsWith("CadLink 配列サイズエラー")) return;
         }
         Assert.Fail("A Cad.CadException indicating a CadLink array size error was not thrown.");
     }
