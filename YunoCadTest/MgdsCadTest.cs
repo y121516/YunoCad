@@ -184,6 +184,35 @@ public class MgdsCadTest : MgdsCadTestBase
         ContextTest(Document, GetNumSelObj);
     }
 
+    void GetObjSelections()
+    {
+        {
+            // Succeeds when 1 or more elements are selected
+            var objs = new Cad.ObjPair[1];
+            Cad.GetObjSelections(1, objs);
+        }
+        ThrowsCadException(InvalidParameter, () =>
+        {
+            var objs = new Cad.ObjPair[1];
+            Cad.GetObjSelections(0, objs);
+        });
+        ThrowsCadLinkArraySizeErrorException(() =>
+        {
+            var objs = Array.Empty<Cad.ObjPair>();
+            Cad.GetObjSelections(1, objs);
+        });
+        Assert.ThrowsException<NullReferenceException>(() =>
+        {
+            Cad.GetObjSelections(1, null);
+        });
+    }
+
+    [TestMethod]
+    public void GetObjSelectionsTest()
+    {
+        ContextTest(ElementsSelected, GetObjSelections);
+    }
+
     void GetSelectMode()
     {
         _ = Cad.GetSelectMode();
