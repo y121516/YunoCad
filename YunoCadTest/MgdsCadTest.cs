@@ -723,6 +723,25 @@ public class MgdsCadTest : MgdsCadTestBase
         ContextTest(Global, StartMicroGDS);
     }
 
+    void StylePath()
+    {
+        // If the 'path' argument is not an empty string and does not end with a semicolon,
+        // a semicolon is appended.
+        Cad.StylePath(""); // ""
+        Cad.StylePath("path/to"); // "path/to;"
+        Cad.StylePath("path/to;"); // "path/to;"
+        ThrowsCadException(InvalidParameter, () =>
+        {
+            Cad.StylePath(null);
+        });
+    }
+
+    [TestMethod]
+    public void StylePathTest()
+    {
+        ContextTest(Document, StylePath);
+    }
+
     void WindowArrange1()
     {
         Cad.WindowArrange(Arrange.Cascade);
