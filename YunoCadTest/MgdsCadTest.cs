@@ -330,6 +330,17 @@ public class MgdsCadTest : MgdsCadTestBase
         ContextTest(Document, GetSetEditText);
     }
 
+    void GetStylePath()
+    {
+        Cad.GetStylePath(out string _);
+    }
+
+    [TestMethod]
+    public void GetStylePathTest()
+    {
+        ContextTest(Document, GetStylePath);
+    }
+
     void Open()
     {
         const string fileName = @"C:\Program Files\Informatix\MicroGDS 11.3\Sample Drawings\Sdmf1.man";
