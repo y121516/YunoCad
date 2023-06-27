@@ -131,5 +131,18 @@ public interface IDocumentContext : IMgdsContext
         set => Cad.SetEditText(value);
     }
 
+    string StylePath
+    {
+        get
+        {
+            Cad.GetStylePath(out var value);
+            return value;
+        }
+        set
+        {
+            Cad.StylePath(value);
+        }
+    }
+
     DocViewType ViewType => Cad.DocGetViewType();
 }

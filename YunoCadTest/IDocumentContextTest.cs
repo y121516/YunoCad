@@ -206,4 +206,24 @@ public class IDocumentContextTest
             mgds.Exit();
         }, id);
     }
+
+    [TestMethod]
+    public void StylePath()
+    {
+        var ctx = IGlobalContext.Instance;
+        var id = ctx.StartMicroGDS();
+        using var c = new Conversation();
+        c.Start(mgds =>
+        {
+            mgds.CreateManFile();
+            Cad.CloseView();
+            mgds.HandleDocument(document =>
+            {
+                var stylePath = document.StylePath;
+                document.StylePath = $"{stylePath}path;to";
+                stylePath = document.StylePath;
+            });
+            mgds.Exit();
+        }, id);
+    }
 }
