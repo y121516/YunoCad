@@ -99,4 +99,23 @@ public class IMgdsContextTest
         mc.ScreenUpdateMode(ScreenUpdate.Bulk);
         Cad.Exit(Save.DoNotSave, Save.DoNotSave);
     }
+
+    [TestMethod]
+    public void SystemTypeTest()
+    {
+        var ctx = IMgdsContext.Instance;
+        var id = ctx.StartMicroGDS();
+        using var c = new Conversation();
+        c.Start(mgds =>
+        {
+            var systemType = mgds.SystemType;
+            _ = systemType.Sys;
+            _ = systemType.MajorVersion;
+            _ = systemType.MinorVersion;
+            _ = systemType.GetVersion();
+            var (_, _, _) = systemType;
+            var (_, _) = systemType;
+            mgds.Exit();
+        }, id);
+    }
 }

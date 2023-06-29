@@ -56,4 +56,31 @@ public interface IMgdsContext : IGlobalContext
 
     void ScreenUpdateMode(ScreenUpdate updateMode)
         => Cad.ScreenUpdateMode(updateMode);
+
+    SystemType SystemType
+    {
+        get
+        {
+            Sys sys = Cad.GetSystemType(out int majVer, out int minVer);
+            return new(sys, majVer, minVer);
+        }
+    }
+}
+
+public readonly record struct SystemType(Sys Sys, int MajorVersion, int MinorVersion)
+{
+    public void Deconstruct(out Sys sys, out int majorVersion, out int minorVersion)
+    {
+        sys = Sys;
+        majorVersion = MajorVersion;
+        minorVersion = MinorVersion;
+    }
+
+    public void Deconstruct(out int majorVersion, out int minorVersion)
+    {
+        majorVersion = MajorVersion;
+        minorVersion = MinorVersion;
+    }
+
+    public Version GetVersion() => new(MajorVersion, MinorVersion);
 }
