@@ -87,6 +87,20 @@ public class IMgdsContextTest
     }
 
     [TestMethod]
+    public void LoadMenuTest()
+    {
+        var ctx = IMgdsContext.Instance;
+        var id = ctx.StartMicroGDS();
+        using var c = new Conversation();
+        c.Start(mgds =>
+        {
+            var path = Path.Combine(Environment.CurrentDirectory, "automenu.cfg");
+            mgds.LoadMenu(path);
+            mgds.Exit();
+        }, id);
+    }
+
+    [TestMethod]
     public void OpenTest()
     {
         var ctx = IMgdsContext.Instance;

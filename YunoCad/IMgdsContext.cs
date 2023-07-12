@@ -33,6 +33,8 @@ public interface IMgdsContext : IGlobalContext
 
     void KillInteractiveCmd() => Cad.KillInteractiveCmd();
 
+    void LoadMenu(string fileName, string section = "MENU") => Cad.LoadMenu(fileName, section);
+
     void Open(string fileName, string formatOptions)
     {
         // Bug: This is a critical bug in MicroGDS 11.3. 
