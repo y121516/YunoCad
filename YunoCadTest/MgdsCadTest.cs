@@ -341,6 +341,17 @@ public class MgdsCadTest : MgdsCadTestBase
         ContextTest(Document, GetStylePath);
     }
 
+    void KillInteractiveCmd()
+    {
+        Cad.KillInteractiveCmd();
+    }
+
+    [TestMethod]
+    public void KillInteractiveCmdTest()
+    {
+        ContextTest(Mgds, KillInteractiveCmd);
+    }
+
     void Open()
     {
         const string fileName = @"C:\Program Files\Informatix\MicroGDS 11.3\Sample Drawings\Sdmf1.man";
