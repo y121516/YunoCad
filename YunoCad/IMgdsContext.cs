@@ -31,6 +31,8 @@ public interface IMgdsContext : IGlobalContext
         action(IDocumentContext.Instance);
     }
 
+    void KillInteractiveCmd() => Cad.KillInteractiveCmd();
+
     void Open(string fileName, string formatOptions)
     {
         // Bug: This is a critical bug in MicroGDS 11.3. 

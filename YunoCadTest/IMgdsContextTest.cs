@@ -74,6 +74,19 @@ public class IMgdsContextTest
     }
 
     [TestMethod]
+    public void KillInteractiveCmdTest()
+    {
+        var ctx = IMgdsContext.Instance;
+        var id = ctx.StartMicroGDS();
+        using var c = new Conversation();
+        c.Start(mgds =>
+        {
+            mgds.KillInteractiveCmd();
+            mgds.Exit();
+        }, id);
+    }
+
+    [TestMethod]
     public void OpenTest()
     {
         var ctx = IMgdsContext.Instance;
