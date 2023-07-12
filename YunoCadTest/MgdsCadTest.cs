@@ -352,6 +352,35 @@ public class MgdsCadTest : MgdsCadTestBase
         ContextTest(Mgds, KillInteractiveCmd);
     }
 
+    void LoadMenu()
+    {
+        var path = Path.Combine(Environment.CurrentDirectory, "automenu.cfg");
+        Cad.LoadMenu(path, "MENU");
+
+        ThrowsCadException(MenuLoadFail, () =>
+        {
+            Cad.LoadMenu(path, "");
+        });
+        ThrowsCadException(MenuLoadFail, () =>
+        {
+            Cad.LoadMenu("", "MENU");
+        });
+        ThrowsCadException(InvalidParameter, () =>
+        {
+            Cad.LoadMenu(path, null);
+        });
+        ThrowsCadException(InvalidParameter, () =>
+        {
+            Cad.LoadMenu(null, "MENU");
+        });
+    }
+
+    [TestMethod]
+    public void LoadMenuTest()
+    {
+        ContextTest(Mgds, LoadMenu);
+    }
+
     void Open()
     {
         const string fileName = @"C:\Program Files\Informatix\MicroGDS 11.3\Sample Drawings\Sdmf1.man";
