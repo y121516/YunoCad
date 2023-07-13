@@ -424,6 +424,24 @@ public class MgdsCadTest : MgdsCadTestBase
         ContextTest(Mgds, Open);
     }
 
+    void Prompt()
+    {
+        Cad.Prompt("");
+        Cad.Prompt("hello, world");
+        Cad.Prompt("A\rB\nC\r\nD\tE");
+
+        ThrowsCadException(InvalidParameter, () =>
+        {
+            Cad.Prompt(null);
+        });
+    }
+
+    [TestMethod]
+    public void PromptTest()
+    {
+        ContextTest(Mgds, Prompt);
+    }
+
     void SaveAs()
     {
         var tempManFile = Path.Combine(Path.GetTempPath(), $"{nameof(SaveAs)}Test.man");
