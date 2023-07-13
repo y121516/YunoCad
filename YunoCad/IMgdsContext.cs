@@ -58,6 +58,8 @@ public interface IMgdsContext : IGlobalContext
         Open(fileName, options.Xml());
     }
 
+    void Prompt(string message) => Cad.Prompt(message);
+
     void ScreenUpdateMode(ScreenUpdate updateMode)
         => Cad.ScreenUpdateMode(updateMode);
 

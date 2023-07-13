@@ -116,6 +116,19 @@ public class IMgdsContextTest
     }
 
     [TestMethod]
+    public void PromptTest()
+    {
+        var ctx = IMgdsContext.Instance;
+        var id = ctx.StartMicroGDS();
+        using var c = new Conversation();
+        c.Start(mgds =>
+        {
+            mgds.Prompt("hello, world!");
+            mgds.Exit();
+        }, id);
+    }
+
+    [TestMethod]
     public void ScreenUpdateModeTest()
     {
         var mc = IMgdsContext.Instance;
